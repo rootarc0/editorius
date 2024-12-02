@@ -6,7 +6,7 @@ import os
 class TextEditor:
     def __init__(self, root, filename=None):
         self.root = root
-        self.root.title("Editorius ver. 1.1 (RU)")
+        self.root.title("Editorius ver. 1.2 (RU)")
         self.text = tk.Text(root)
         self.text.pack(expand=True, fill='both')
 
@@ -21,6 +21,7 @@ class TextEditor:
         self.root.bind('<Control-s>', self.save_file)
         self.root.bind('<Control-a>', self.save_file_and_exit)
         self.root.bind('<Control-d>', self.exit_without_saving)
+        self.root.bind('<Control-o>', self.open_file_dialog)  # Добавлено для открытия файла
 
         # Открытие файла, если он указан
         if filename:
@@ -55,6 +56,11 @@ class TextEditor:
         except FileNotFoundError:
             messagebox.showwarning("Файл не найден", f"Файл '{file_path}' не найден. Создан новый файл.")
             self.new_file()
+
+    def open_file_dialog(self, event=None):
+        file_path = filedialog.askopenfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt"), ("All files", "*.*")])
+        if file_path:
+            self.open_file(file_path)
 
     def new_file(self):
         self.text.delete(1.0, tk.END)
