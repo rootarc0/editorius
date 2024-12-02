@@ -2,7 +2,7 @@
 Ctrl + P - menu 
 
 Ctrl + O - open file
-
+# Menu
 y for save
 
 a for save and exit
